@@ -1,0 +1,13 @@
+D:\4.learn\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.exe
+D:\4.learn\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.deps.json
+D:\4.learn\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.runtimeconfig.json
+D:\4.learn\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.runtimeconfig.dev.json
+D:\4.learn\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.dll
+D:\4.learn\Server\ServerCore\bin\Debug\netcoreapp3.1\ServerCore.pdb
+D:\4.learn\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.GeneratedMSBuildEditorConfig.editorconfig
+D:\4.learn\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfoInputs.cache
+D:\4.learn\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.AssemblyInfo.cs
+D:\4.learn\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.csproj.CoreCompileInputs.cache
+D:\4.learn\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.dll
+D:\4.learn\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.pdb
+D:\4.learn\Server\ServerCore\obj\Debug\netcoreapp3.1\ServerCore.genruntimeconfig.cache
