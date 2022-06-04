@@ -14,7 +14,6 @@ namespace ServerCore
         {
             try
             {
-                Console.WriteLine("Listening...");
                 byte[] sendBuffe = Encoding.UTF8.GetBytes("welcome to MMORPG Server !...");
 
                 Session session = new Session();

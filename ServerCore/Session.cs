@@ -11,6 +11,11 @@ namespace ServerCore
         Socket _socket;
         int _disconneted = 0; //커넥션 확인 하는 플레그
 
+        bool _pending = false;
+        Queue<byte[]> _sendQue = new Queue<byte[]>();
+        SocketAsyncEventArgs _sendArgs = new SocketAsyncEventArgs();
+        object _sendLock = new object();
+
         public void Start(Socket clientSocket)
         {
             _socket = clientSocket;
@@ -18,7 +23,10 @@ namespace ServerCore
             SocketAsyncEventArgs receiveArgs = new SocketAsyncEventArgs();
             receiveArgs.Completed += new EventHandler<SocketAsyncEventArgs>(OnRecvCompleted);
             receiveArgs.SetBuffer(new byte[1024], 0, 1024);
-            Registerrecv(receiveArgs);
+            RegisterRecv(receiveArgs);
+
+
+            _sendArgs.Completed += new EventHandler<SocketAsyncEventArgs>(OnSendCompleted);
         }
 
         public void Disconneted()
@@ -33,11 +41,57 @@ namespace ServerCore
 
         public void sendData(byte[] sendBuffe)
         {
-            _socket.Send(sendBuffe);
+            lock(_sendLock)
+            {
+                _sendQue.Enqueue(sendBuffe);
+                if (!_pending)
+                    RegisterSend();
+            }
+            //_socket.Send(sendBuffe);
         }
 
         #region 네트워크 통신
-        void Registerrecv(SocketAsyncEventArgs args)
+
+        void RegisterSend()
+        {
+            byte[] sendBuffe = _sendQue.Dequeue();
+            _pending = true;
+            _sendArgs.SetBuffer(sendBuffe, 0, sendBuffe.Length);
+
+            bool pending = _socket.SendAsync(_sendArgs);
+            if (!pending)
+                OnSendCompleted(null, _sendArgs);
+        }
+
+        void OnSendCompleted(object sender, SocketAsyncEventArgs args)
+        {
+            lock(_sendLock)
+            {
+                if (args.BytesTransferred > 0 && args.SocketError == SocketError.Success)
+                {
+                    try
+                    {
+                        if (_sendQue.Count > 0)
+                            RegisterSend();
+                        else
+                            _pending = false;
+                        //string ReceiveData = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
+                        //Console.WriteLine($"[From Client] {ReceiveData}");
+                        //RegisterSend();
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine($"OnRecvCompleted Failed {e}");
+                    }
+                }
+                else
+                {
+                    Disconneted();
+                }
+            }
+        }
+
+        void RegisterRecv(SocketAsyncEventArgs args)
         {
             bool pending = _socket.ReceiveAsync(args);
             if (!pending)
@@ -52,7 +106,7 @@ namespace ServerCore
                 {
                     string ReceiveData = Encoding.UTF8.GetString(args.Buffer, args.Offset, args.BytesTransferred);
                     Console.WriteLine($"[From Client] {ReceiveData}");
-                    Registerrecv(args);
+                    RegisterRecv(args);
                 }
                 catch(Exception e)
                 {
@@ -61,7 +115,7 @@ namespace ServerCore
             }
             else
             {
-                //Console.WriteLine($"SoketError {args.SocketError}");
+                Disconneted();
             }
 
         }
