@@ -12,3 +12,6 @@ D:\4.learn\Server\Server\obj\Debug\netcoreapp3.1\Server.csproj.CoreCompileInputs
 D:\4.learn\Server\Server\obj\Debug\netcoreapp3.1\Server.dll
 D:\4.learn\Server\Server\obj\Debug\netcoreapp3.1\Server.pdb
 D:\4.learn\Server\Server\obj\Debug\netcoreapp3.1\Server.genruntimeconfig.cache
+D:\4.learn\Server\Server\bin\Debug\netcoreapp3.1\ServerCore.dll
+D:\4.learn\Server\Server\bin\Debug\netcoreapp3.1\ServerCore.pdb
+D:\4.learn\Server\Server\obj\Debug\netcoreapp3.1\Server.csproj.CopyComplete

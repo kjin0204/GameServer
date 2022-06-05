@@ -12,3 +12,6 @@ D:\4.learn\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.csproj.CoreCom
 D:\4.learn\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.dll
 D:\4.learn\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.pdb
 D:\4.learn\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.genruntimeconfig.cache
+D:\4.learn\Server\DummyClient\bin\Debug\netcoreapp3.1\ServerCore.dll
+D:\4.learn\Server\DummyClient\bin\Debug\netcoreapp3.1\ServerCore.pdb
+D:\4.learn\Server\DummyClient\obj\Debug\netcoreapp3.1\DummyClient.csproj.CopyComplete
