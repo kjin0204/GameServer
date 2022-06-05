@@ -7,6 +7,12 @@ using ServerCore;
 namespace Server
 {
 
+    class Knight
+    {
+        public int hp;
+        public int attack;
+    }
+
     class GameSession : Session
     {
         public override void OnConnected(EndPoint endPoint)
@@ -24,10 +30,12 @@ namespace Server
         {
         }
 
-        public override void OnRecv(ArraySegment<byte> buffer)
+        public override int OnRecv(ArraySegment<byte> buffer)
         {
             string ReceiveData = Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
             Console.WriteLine($"[From Client] {ReceiveData}");
+
+            return buffer.Count;
         }
 
         public override void OnSend(int numOfBytes)

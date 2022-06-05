@@ -12,6 +12,8 @@ namespace ServerCore
         Socket _socket;
         int _disconneted = 0; //커넥션 확인 하는 플레그
 
+        RecvBuffer _recvBuffer = new RecvBuffer(1024);
+
         List<ArraySegment<byte>> _pendingList = new List<ArraySegment<byte>>();
         Queue<byte[]> _sendQue = new Queue<byte[]>();
         SocketAsyncEventArgs _sendArgs = new SocketAsyncEventArgs();
@@ -19,7 +21,7 @@ namespace ServerCore
         object _sendLock = new object();
 
         public abstract void OnConnected(EndPoint endPoint);
-        public abstract void OnRecv(ArraySegment<byte> buffer);
+        public abstract int OnRecv(ArraySegment<byte> buffer);
         public abstract void OnSend(int numOfBytes);
         public abstract void OnDisconnected(EndPoint endPoint);
 
@@ -28,7 +30,6 @@ namespace ServerCore
             _socket = clientSocket;
 
             _receiveArgs.Completed += new EventHandler<SocketAsyncEventArgs>(OnRecvCompleted);
-            _receiveArgs.SetBuffer(new byte[1024], 0, 1024);
             RegisterRecv();
 
             _sendArgs.Completed += new EventHandler<SocketAsyncEventArgs>(OnSendCompleted);
@@ -36,7 +37,7 @@ namespace ServerCore
 
         public void Disconneted()
         {
-            if ( Interlocked.CompareExchange(ref _disconneted, 1, 0) != 0)
+            if (Interlocked.CompareExchange(ref _disconneted, 1, 0) != 0)
                 return;
 
             OnDisconnected(_socket.RemoteEndPoint);
@@ -49,7 +50,7 @@ namespace ServerCore
 
         public void Send(byte[] sendBuffe)
         {
-            lock(_sendLock)
+            lock (_sendLock)
             {
                 _sendQue.Enqueue(sendBuffe);
                 if (_pendingList.Count == 0)
@@ -63,7 +64,7 @@ namespace ServerCore
         void RegisterSend()
         {
 
-            while(_sendQue.Count >0)
+            while (_sendQue.Count > 0)
             {
                 byte[] buff = _sendQue.Dequeue();
                 _pendingList.Add(new ArraySegment<byte>(buff, 0, buff.Length));
@@ -77,7 +78,7 @@ namespace ServerCore
 
         void OnSendCompleted(object sender, SocketAsyncEventArgs args)
         {
-            lock(_sendLock)
+            lock (_sendLock)
             {
                 if (args.BytesTransferred > 0 && args.SocketError == SocketError.Success)
                 {
@@ -105,6 +106,9 @@ namespace ServerCore
 
         void RegisterRecv()
         {
+            _recvBuffer.Clean();
+            ArraySegment<byte> segment = _recvBuffer.WriteSegment;
+            _receiveArgs.SetBuffer(segment.Array, segment.Offset, segment.Count);
             bool pending = _socket.ReceiveAsync(_receiveArgs);
             if (!pending)
                 OnRecvCompleted(null, _receiveArgs);
@@ -116,10 +120,32 @@ namespace ServerCore
             {
                 try
                 {
-                    OnRecv(new ArraySegment<byte>(args.Buffer, args.Offset, args.BytesTransferred));
+                    //Write 커서 이동
+                    if (_recvBuffer.OnWrite(args.BytesTransferred) == false)
+                    {
+                        Disconneted();
+                        return;
+                    }
+
+                    //컨텐츠 쪽으로 데이터를 넘겨주고 얼마나 처리햇는지 받는다.
+                    int ProcessLen = OnRecv(_recvBuffer.Readsegment);
+                    if(ProcessLen < 0 || _recvBuffer.DataSize < ProcessLen)
+                    {
+                        Disconneted();
+                        return;
+                    }
+
+                    //Read 커서이동
+                    if(_recvBuffer.OnRead(ProcessLen) == false)
+                    {
+                        Disconneted();
+                        return;
+                    }
+
+
                     RegisterRecv();
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Console.WriteLine($"OnRecvCompleted Failed {e}");
                 }
