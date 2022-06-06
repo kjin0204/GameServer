@@ -108,7 +108,6 @@ namespace Server
             success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), stringLen);
             count += stringLen;
             count += sizeof(ushort);
-            success &= BitConverter.TryWriteBytes(s, count);
 
             //skill
             ushort skillLne = (ushort)skills.Count;
@@ -119,6 +118,7 @@ namespace Server
                 skills[i].Write(s, ref count);
             }
 
+            success &= BitConverter.TryWriteBytes(s, count);
             if (success == false)
                 return null;
 
@@ -152,6 +152,29 @@ namespace Server
 
             Thread.Sleep(1000);
 
+            PlayerInfoReq packet = new PlayerInfoReq() { playerId = 1001, name = "가나다" };
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { level = 1, duration = 3.0f, id = 100 });
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { level = 2, duration = 4.0f, id = 101 });
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { level = 3, duration = 5.0f, id = 102 });
+            packet.skills.Add(new PlayerInfoReq.SkillInfo() { level = 4, duration = 6.0f, id = 103 });
+
+            //for (int i = 0; i < 5; i++)
+            {
+                ArraySegment<byte> s = packet.Write();
+                if (s != null)
+                    Send(s);
+
+                //byte[] buffer = BitConverter.GetBytes(knight.size);
+                //byte[] buffer2 = BitConverter.GetBytes(knight.packetId);
+                //byte[] buffer3 = BitConverter.GetBytes(knight.playerId);
+                //Array.Copy(buffer, 0, s.Array, s.Offset + count, buffer.Length);
+                //count += 2;
+                //Array.Copy(buffer2, 0, s.Array, s.Offset + count, buffer2.Length);
+                //count += 2;
+                //Array.Copy(buffer3, 0, s.Array, s.Offset + count, buffer3.Length);
+                //count += 8;
+            }
+            Thread.Sleep(3000);
             Disconneted();
             Disconneted();
         }

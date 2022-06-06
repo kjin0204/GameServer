@@ -79,8 +79,9 @@ namespace DummyClient
 
             //skills
             ushort skillLen = (ushort)BitConverter.ToInt64(s.Slice(count, s.Length - count));
+            count += 2;
 
-            for(int i =0; i < skillLen; i++)
+            for (int i =0; i < skillLen; i++)
             {
                 skills.Add(new SkillInfo().Read(s, ref count));
             }
@@ -136,7 +137,7 @@ namespace DummyClient
         PlayerInfoOk = 2
     }
 
-    class ServerSession : Session
+    class ServerSession : PacketSession
     {
         public override void OnConnected(EndPoint endPoint)
         {
@@ -165,7 +166,7 @@ namespace DummyClient
                 //count += 8;
             }
 
-            Thread.Sleep(1000);
+            Thread.Sleep(5000);
 
             Disconneted();
             Disconneted();
@@ -175,12 +176,38 @@ namespace DummyClient
         {
         }
 
-        public override int OnRecv(ArraySegment<byte> buffer)
-        {
-            string ReceiveData = Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
-            Console.WriteLine($"[From Server] {ReceiveData}");
+        //public override int OnRecv(ArraySegment<byte> buffer)
+        //{
+        //    string ReceiveData = Encoding.UTF8.GetString(buffer.Array, buffer.Offset, buffer.Count);
+        //    Console.WriteLine($"[From Server] {ReceiveData}");
 
-            return buffer.Count;
+        //    return buffer.Count;
+        //}
+
+        public override void OnRecvPacket(ArraySegment<byte> buffer)
+        {
+            int count = 0;
+            ushort size = BitConverter.ToUInt16(buffer.Array, buffer.Offset);
+            count += 2;
+            ushort id = BitConverter.ToUInt16(buffer.Array, buffer.Offset + 2);
+            count += 2;
+
+            switch ((PacketID)id)
+            {
+                case PacketID.PlayerInfoReq:
+                    PlayerInfoReq p = new PlayerInfoReq();
+                    p.Read(buffer);
+
+                    Console.WriteLine($"PlayerInfoReq : {p.playerId},{p.name} ");
+                    foreach (PlayerInfoReq.SkillInfo data in p.skills)
+                    {
+                        Console.WriteLine($"SkillList : {data.id},{data.level},{data.duration} ");
+                    }
+                    break;
+            }
+            Console.WriteLine($"ReceiveId : {id} , size : {size}");
+
+            //return buffer.Count;
         }
 
         public override void OnSend(int numOfBytes)
