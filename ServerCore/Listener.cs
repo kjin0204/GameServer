@@ -27,7 +27,7 @@ namespace ServerCore
 
             SocketAsyncEventArgs args = new SocketAsyncEventArgs();
             //클라 접속 되면 연결 해준 함수로 콜백 해줌
-            args.Completed += new EventHandler<SocketAsyncEventArgs>(Onacceptcompleted);
+            args.Completed += new EventHandler<SocketAsyncEventArgs>(OnAcceptcompleted);
             RegisterAccept(args);
 
             Console.WriteLine("Listening...");
@@ -39,10 +39,10 @@ namespace ServerCore
             args.AcceptSocket = null;
             bool pending = _listenSocket.AcceptAsync(args);
             if (!pending) // pending true면 아직 접속된 클라가 없다는 뜻.
-                Onacceptcompleted(null,args);
+                OnAcceptcompleted(null,args);
         }
 
-        void Onacceptcompleted(object sender , SocketAsyncEventArgs args)
+        void OnAcceptcompleted(object sender , SocketAsyncEventArgs args)
         {
             if (args.SocketError == SocketError.Success)
             {

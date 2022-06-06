@@ -7,6 +7,12 @@ using System.Threading;
 
 namespace DummyClient
 {
+    class Packet
+    {
+        public ushort size;
+        public ushort packetId;
+    }
+
     class GameSession : Session
     {
         public override void OnConnected(EndPoint endPoint)
@@ -15,9 +21,16 @@ namespace DummyClient
 
             for (int i = 0; i < 5; i++)
             {
-                //보낸다.(블로킹 함수)
-                byte[] sendbuff = Encoding.UTF8.GetBytes($"Hellow world! {i}");
-                Send(sendbuff);
+                Packet knight = new Packet() { size = 4, packetId = 7 };
+                ArraySegment<byte> openSegment = SendBufferHelper.Open(4096);
+                byte[] buffer = BitConverter.GetBytes(knight.size);
+                byte[] buffer2 = BitConverter.GetBytes(knight.packetId);
+                Array.Copy(buffer, 0, openSegment.Array, openSegment.Offset, buffer.Length);
+                Array.Copy(buffer2, 0, openSegment.Array, openSegment.Offset + buffer.Length, buffer2.Length);
+                ArraySegment<byte> sendBuffe = SendBufferHelper.Close(knight.size);
+
+
+                Send(sendBuffe);
             }
 
             Thread.Sleep(1000);
