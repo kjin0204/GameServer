@@ -7,6 +7,37 @@ using System.Threading;
 
 namespace ServerCore
 {
+    public abstract class PacketSession : Session
+    {
+        public static readonly int HeaderSize = 2;
+        //[size(2)][packeid(2)] [....]
+        public sealed override int OnRecv(ArraySegment<byte> buffer)
+        {
+            int processLen = 0;
+            
+            while(true)
+            {
+                //최소한 헤더는 파싱할 수 있는지 확인
+                if (buffer.Count < HeaderSize)
+                    break;
+
+                ushort dataSize = BitConverter.ToUInt16(buffer.Array, buffer.Offset);
+                if (buffer.Count < dataSize)
+                    break;
+
+                OnRecvPacket(new ArraySegment<byte>(buffer.Array,buffer.Offset,dataSize));
+
+                processLen += dataSize;
+                buffer = new ArraySegment<byte>(buffer.Array, buffer.Offset + dataSize, buffer.Count - dataSize);
+            }
+            return processLen;
+
+        }
+
+        abstract public void OnRecvPacket(ArraySegment<byte> buffer);
+
+    }
+
     public abstract class Session
     {
         Socket _socket;
@@ -53,7 +84,7 @@ namespace ServerCore
             lock (_sendLock)
             {
                 _sendQue.Enqueue(sendBuffe);
-                //sendBuffe.Array[0] = 50;
+
                 if (_pendingList.Count == 0)
                     RegisterSend();
             }
@@ -64,7 +95,6 @@ namespace ServerCore
 
         void RegisterSend()
         {
-
             while (_sendQue.Count > 0)
             {
                 ArraySegment<byte> buff = _sendQue.Dequeue();
@@ -130,14 +160,14 @@ namespace ServerCore
 
                     //컨텐츠 쪽으로 데이터를 넘겨주고 얼마나 처리햇는지 받는다.
                     int ProcessLen = OnRecv(_recvBuffer.Readsegment);
-                    if(ProcessLen < 0 || _recvBuffer.DataSize < ProcessLen)
+                    if (ProcessLen < 0 || _recvBuffer.DataSize < ProcessLen)
                     {
                         Disconneted();
                         return;
                     }
 
                     //Read 커서이동
-                    if(_recvBuffer.OnRead(ProcessLen) == false)
+                    if (_recvBuffer.OnRead(ProcessLen) == false)
                     {
                         Disconneted();
                         return;

@@ -29,7 +29,6 @@ namespace ServerCore
     }
     public class SendBuffer
     {
-
         byte[] _buffer;
         int _usedSize = 0;
 
