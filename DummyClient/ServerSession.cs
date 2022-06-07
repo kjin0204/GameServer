@@ -7,16 +7,9 @@ using System.Threading;
 
 namespace DummyClient
 {
-    abstract class Packet
-    {
-        public ushort size;
-        public ushort packetId;
+    
 
-        public abstract ArraySegment<byte> Write();
-        public abstract void Read(ArraySegment<byte> s);
-    }
-
-    class PlayerInfoReq : Packet
+    class PlayerInfoReq
     {
         public long playerId;
         public string name;
@@ -57,7 +50,7 @@ namespace DummyClient
 
         public List<SkillInfo> skills = new List<SkillInfo>();
 
-        public override void Read(ArraySegment<byte> segment)
+        public void Read(ArraySegment<byte> segment)
         {
             ReadOnlySpan<byte> s = new ReadOnlySpan<byte>(segment.Array,segment.Offset,segment.Count);
 
@@ -72,10 +65,10 @@ namespace DummyClient
             count += 8;
 
             //string
-            ushort stringLen = (ushort)BitConverter.ToInt64(s.Slice(count, s.Length - count));
+            ushort nameLen = (ushort)BitConverter.ToInt64(s.Slice(count, s.Length - count));
             count += 2;
-            name = Encoding.Unicode.GetString(segment.Array, count, stringLen);
-            count += stringLen;
+            name = Encoding.Unicode.GetString(segment.Array, count, nameLen);
+            count += nameLen;
 
             //skills
             ushort skillLen = (ushort)BitConverter.ToInt64(s.Slice(count, s.Length - count));
@@ -87,7 +80,7 @@ namespace DummyClient
             }
         }
 
-        public override ArraySegment<byte> Write()
+        public ArraySegment<byte> Write()
         {
             ArraySegment<byte> segment = SendBufferHelper.Open(4096);
             Span<byte> s = new Span<byte>(segment.Array, segment.Offset, segment.Count);
@@ -103,9 +96,9 @@ namespace DummyClient
 
 
             //string StringLen를 string값 앞에 넣어주기 위해 2바이트 뒤에 string 입력
-            ushort stringLen = (ushort)Encoding.Unicode.GetBytes(this.name, 0, this.name.Length, segment.Array, segment.Offset + count + sizeof(ushort));
-            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), stringLen);
-            count += stringLen;
+            ushort nameLen = (ushort)Encoding.Unicode.GetBytes(this.name, 0, this.name.Length, segment.Array, segment.Offset + count + sizeof(ushort));
+            success &= BitConverter.TryWriteBytes(s.Slice(count, s.Length - count), nameLen);
+            count += nameLen;
             count += sizeof(ushort);
 
             //skill
