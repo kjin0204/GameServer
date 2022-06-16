@@ -12,3 +12,9 @@ D:\4.learn\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.csproj
 D:\4.learn\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.dll
 D:\4.learn\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.pdb
 D:\4.learn\Server\PacketGenerator\obj\Debug\netcoreapp3.1\PacketGenerator.genruntimeconfig.cache
+D:\4.learn\Server\PacketGenerator\bin\netcoreapp3.1\PacketGenerator.exe
+D:\4.learn\Server\PacketGenerator\bin\netcoreapp3.1\PacketGenerator.deps.json
+D:\4.learn\Server\PacketGenerator\bin\netcoreapp3.1\PacketGenerator.runtimeconfig.json
+D:\4.learn\Server\PacketGenerator\bin\netcoreapp3.1\PacketGenerator.runtimeconfig.dev.json
+D:\4.learn\Server\PacketGenerator\bin\netcoreapp3.1\PacketGenerator.dll
+D:\4.learn\Server\PacketGenerator\bin\netcoreapp3.1\PacketGenerator.pdb

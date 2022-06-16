@@ -14,6 +14,8 @@ namespace Server
 
         static void Main(string[] args)
         {
+            PacketManager.Instance.Register();
+
             string host = Dns.GetHostName();
             IPHostEntry ipHost = Dns.GetHostEntry(host);
             IPAddress ipaddr = ipHost.AddressList[0]; //아이피가 여러개 있을수 있으며 배열로 ip를 반환함
