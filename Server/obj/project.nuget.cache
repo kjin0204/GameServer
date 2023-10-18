@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Z74cN8jiOK9tSiEljRTMYoMjf1AoexkjNMstU4wjTk2SrgC+lB8kVvXcUTcblWD96Q9NYKhbkzlfl+48IE4k/Q==",
+  "dgSpecHash": "cQVF2h8z5KNzlrGKjYgI4iZ30b0u7IWhmTZKrkzHfMbAJJJ/arSDC84PBUi+dcdck3+qa6EnG1+RK8UxNY8Jfw==",
   "success": true,
-  "projectFilePath": "D:\\4.learn\\Server\\Server\\Server.csproj",
+  "projectFilePath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\Server\\Server.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

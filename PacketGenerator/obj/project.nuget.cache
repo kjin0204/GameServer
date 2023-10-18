@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "s+uCbFquRxfRZ5uRC+rSm9TloNczi0LLpFN6YYREJ/x3lEoWSq43c4eULnuqOUwVyTN00K7Qoa1RyK4o70h/DA==",
+  "dgSpecHash": "cDoOKjjmMJ/LQro9OBmdcqN130bLkBkErZmFGj2bc+dXL/BCghYATgfMsrJWtEhcXd0EYTxjDc09jzflQqKh5A==",
   "success": true,
-  "projectFilePath": "D:\\4.learn\\Server\\PacketGenerator\\PacketGenerator.csproj",
+  "projectFilePath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
