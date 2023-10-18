@@ -32,9 +32,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\Server\\Server.csproj",
+      "projectUniqueName": "C:\\Users\\kin02\\source\\repos\\GameServer\\Server\\Server.csproj",
       "projectName": "Server",
-      "projectPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\Server\\Server.csproj",
+      "projectPath": "C:\\Users\\kin02\\source\\repos\\GameServer\\Server\\Server.csproj",
       "packagesPath": "C:\\Users\\kin02\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\Server\\obj\\",
       "projectStyle": "PackageReference",
@@ -53,8 +53,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj": {
-              "projectPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj"
+            "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj": {
+              "projectPath": "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj"
             }
           }
         }

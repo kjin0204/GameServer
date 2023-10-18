@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xnNjg3GLKJ4WAfbtg3dQi1LmTFjsX7BYPvwPa4KBEUIwaOPAKxaSx/gWd9xx0hMQbtBzwcVgTeiHVJW/XAoFHw==",
+  "dgSpecHash": "s82xFF/pgplSwR8egH6gONacpI2jFsskIElYGjPmNvgzhRRRRq7pScVaI121KwGq9At0rLLyr5BDNUVq6DH0LQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj",
+  "projectFilePath": "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

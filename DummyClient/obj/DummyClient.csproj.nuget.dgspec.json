@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kin02\\Source\\Repos\\GameServer\\DummyClient\\DummyClient.csproj": {}
+    "C:\\Users\\kin02\\source\\repos\\GameServer\\DummyClient\\DummyClient.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kin02\\Source\\Repos\\GameServer\\DummyClient\\DummyClient.csproj": {
+    "C:\\Users\\kin02\\source\\repos\\GameServer\\DummyClient\\DummyClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\DummyClient\\DummyClient.csproj",
+        "projectUniqueName": "C:\\Users\\kin02\\source\\repos\\GameServer\\DummyClient\\DummyClient.csproj",
         "projectName": "DummyClient",
-        "projectPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\DummyClient\\DummyClient.csproj",
+        "projectPath": "C:\\Users\\kin02\\source\\repos\\GameServer\\DummyClient\\DummyClient.csproj",
         "packagesPath": "C:\\Users\\kin02\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\DummyClient\\obj\\",
         "projectStyle": "PackageReference",
@@ -28,8 +28,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj": {
-                "projectPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj"
+              "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj": {
+                "projectPath": "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj"
               }
             }
           }
@@ -63,12 +63,12 @@
         }
       }
     },
-    "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj": {
+    "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj",
+        "projectUniqueName": "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj",
         "projectName": "ServerCore",
-        "projectPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\ServerCore.csproj",
+        "projectPath": "C:\\Users\\kin02\\source\\repos\\GameServer\\ServerCore\\ServerCore.csproj",
         "packagesPath": "C:\\Users\\kin02\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\ServerCore\\obj\\",
         "projectStyle": "PackageReference",

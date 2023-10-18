@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0G7dKSK0Rg2zUe7K68p6L70FtKxBFF3yBmJAyylpRLS+5pUdu2MXrwUX03e4KuhgOcHCMHWflPgdRuiQovlQaA==",
+  "dgSpecHash": "6RDbhFQNbuL/VwT0+I6C/HIRONN3je95J1jba2VIMTvD72tBEVI17EnUMPBsNd+7m5FqsRCXCt9reWu8SqR12Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\DummyClient\\DummyClient.csproj",
+  "projectFilePath": "C:\\Users\\kin02\\source\\repos\\GameServer\\DummyClient\\DummyClient.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

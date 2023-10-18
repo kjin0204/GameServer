@@ -1,15 +1,15 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kin02\\Source\\Repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj": {}
+    "C:\\Users\\kin02\\source\\repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kin02\\Source\\Repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj": {
+    "C:\\Users\\kin02\\source\\repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj",
+        "projectUniqueName": "C:\\Users\\kin02\\source\\repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj",
         "projectName": "PacketGenerator",
-        "projectPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj",
+        "projectPath": "C:\\Users\\kin02\\source\\repos\\GameServer\\PacketGenerator\\PacketGenerator.csproj",
         "packagesPath": "C:\\Users\\kin02\\.nuget\\packages\\",
         "outputPath": "C:\\Users\\kin02\\Source\\Repos\\GameServer\\PacketGenerator\\obj\\",
         "projectStyle": "PackageReference",
